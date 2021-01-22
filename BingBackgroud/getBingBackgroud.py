@@ -1,5 +1,9 @@
+import argparse
 import http.client
 import math
+import os
+import time
+import zipfile
 from concurrent.futures import ThreadPoolExecutor
 from urllib import request
 
@@ -7,19 +11,37 @@ from bs4 import BeautifulSoup
 
 COOKIES = None
 HOST = 'https://bing.ioliu.cn/'
-NUMBERTHREAD = 6
+NUMBERTHREAD = 5
 THREADPOOL = ThreadPoolExecutor(NUMBERTHREAD)
 
 
-def ioliudownload(path):
-    amt = get_amt_of_page(HOST)
+def ioliudownload(path: str, whether_pack: bool):
+    if check_path_available(path):
+        amt = get_amt_of_page(HOST)
 
-    for i in range(1, int(amt)):
-        myhost = HOST
-        pageurl = myhost + '?p=' + str(i)
-        # print(pageurl)
-        home_page = 'home_' + str(i)
-        __get_the_page(path, pageurl, home_page)
+        for i in range(1, int(amt)):
+            myhost = HOST
+            pageurl = myhost + '?p=' + str(i)
+            # print(pageurl)
+            home_page = 'home_' + str(i)
+            __get_the_page(path, pageurl, home_page)
+    if whether_pack:
+        zipfile.ZipFile.write(str('BingBackgroud', time.strftime('%Y-%m-%d_%H-%M', time.localtime())))
+
+
+def check_path_available(path: str):
+    """
+检查路径可用性
+    :param path:
+    :return:
+    """
+    if os.path.exists(path):
+        if os.path.isdir(path):
+            return True
+        else:
+            raise Exception('输入路径不是一个文件夹')
+    else:
+        raise Exception('输入路径不存在')
 
 
 def get_amt_of_page(host: str):
@@ -127,5 +149,25 @@ def save_pic(name: list, res: list):
         # picoperation.modify_meta(filename, intro)
 
 
+def main():
+    """
+使用argparser解析命令
+    """
+    path = None
+    whether_pack = False
+    parser = argparse.ArgumentParser('download bing backgroud')
+    parser.add_argument('-o', '--output', type=str, help='file output path')
+    parser.add_argument('-p', '--pack', action='store_true', help='pack file')
+    args = parser.parse_args()
+
+    if args.output is not None:
+        path = args.output
+
+    if args.pack is True:
+        whether_pack = True
+
+    ioliudownload(path, whether_pack)
+
+
 if __name__ == '__main__':
-    ioliudownload('C:\\file\\Bing\\')
+    main()
