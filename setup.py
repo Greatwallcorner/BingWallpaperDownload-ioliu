@@ -8,7 +8,7 @@ with open(os.path.join(os.path.dirname(__file__), 'requirements.txt')) as f:
 
 setup(
     name='bingwp',
-    version='1.1',
+    version='1.2',
     description='download bing.ioliu.cn wallpaper',
     author='heatdesert',
     author_email='wall.corner@outlook.com',
