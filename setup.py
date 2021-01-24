@@ -15,7 +15,9 @@ setup(
     url='https://github.com/Greatwallcorner/BingWallpaperDownload-ioliu/',
     packages=find_packages(),
     platforms='any',
+    license='MIT',
     keywords='bing wallpaper download',
+    install_requires=requirements,
     entry_point={
         'console_scripts': [
             'bingbkg=BingBackgroud.getBingBackgroud:main'
