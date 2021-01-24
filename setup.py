@@ -20,7 +20,7 @@ setup(
     install_requires=requirements,
     entry_point={
         'console_scripts': [
-            'bingbkg=BingBackgroud.getBingBackgroud:main'
+            'bingbkg=BingBackgroud.core:main'
         ]
     }
 )

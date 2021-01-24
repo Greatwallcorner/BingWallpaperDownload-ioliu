@@ -22,6 +22,3 @@ def tuple_test():
     print(key)
 
 
-if __name__ == '__main__':
-    # modify_meta('C:\\file\\Bing\\1.jpg', 'zehshi')
-    tuple_test()
