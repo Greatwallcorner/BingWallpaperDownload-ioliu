@@ -15,5 +15,10 @@ setup(
     url='https://github.com/Greatwallcorner/BingWallpaperDownload-ioliu/',
     packages=find_packages(),
     platforms='any',
-    keywords='bing wallpaper download'
+    keywords='bing wallpaper download',
+    entry_point={
+        'console_scripts': [
+            'bingbkg=BingBackgroud.getBingBackgroud:main'
+        ]
+    }
 )
