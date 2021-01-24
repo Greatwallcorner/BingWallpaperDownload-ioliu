@@ -7,7 +7,7 @@ with open(os.path.join(os.path.dirname(__file__), 'requirements.txt')) as f:
     requirements = [line for line in lines if line and not line.startswith('#')]
 
 setup(
-    name='bingbkg',
+    name='bingwp',
     version='1.1',
     description='download bing.ioliu.cn wallpaper',
     author='heatdesert',
@@ -20,7 +20,7 @@ setup(
     install_requires=requirements,
     entry_point={
         'console_scripts': [
-            'bingbkg=BingBackgroud.core:main'
+            'bingwp=ioliu.core:main'
         ]
     }
 )
