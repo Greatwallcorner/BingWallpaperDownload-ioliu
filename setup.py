@@ -22,6 +22,7 @@ setup(
     long_description=long_description,
     keywords='bing wallpaper download',
     install_requires=requirements,
-    long_description_content_type='text/markdown'
+    long_description_content_type='text/markdown',
+    entry_points={'console_scripts': 'bingwp = ioliu.app:main'}
 
 )
