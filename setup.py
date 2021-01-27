@@ -21,6 +21,7 @@ setup(
     license='MIT',
     long_description=long_description,
     keywords='bing wallpaper download',
-    install_requires=requirements
+    install_requires=requirements,
+    long_description_content_type='text/markdown'
 
 )
