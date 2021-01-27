@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+"""
+heatdesert
+"""
 import argparse
 import http.client
 import math
@@ -45,11 +49,11 @@ def check_path_available(path: str):
 
 
 def get_amt_of_page(host: str):
-    '''
+    """
     获取页数
     :param host:
     :return:
-    '''
+    """
     response = __simpleget(host)
     body = str(response.read())
     soup = BeautifulSoup(body, 'html.parser')
@@ -88,6 +92,11 @@ def __get_the_page(path, pageurl, home_page):
 
 
 def work(download_url_list: list, path: str):
+    """
+
+    :param download_url_list:
+    :param path:
+    """
     lens = len(download_url_list)
     if lens is None or 0:
         raise Exception('传入url列表为空')
@@ -141,6 +150,11 @@ def __download(uri_list: list = None, path: str = None):
 
 
 def save_pic(name: list, res: list):
+    """
+
+    :param name:
+    :param res:
+    """
     for na, re in zip(name, res):
         print(type(re))
         file = open(str(na).encode('utf-8'), 'wb', 2048)
@@ -156,7 +170,7 @@ def main():
     path = None
     whether_pack = False
     parser = argparse.ArgumentParser('download bing backgroud')
-    parser.add_argument('-o', '--output', type=str, help='file output path')
+    parser.add_argument('o', '--output', type=str, help='file output path')
     parser.add_argument('-p', '--pack', action='store_true', help='pack file')
     args = parser.parse_args()
 
@@ -168,6 +182,3 @@ def main():
 
     ioliudownload(path, whether_pack)
 
-
-if __name__ == '__main__':
-    main()
