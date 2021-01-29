@@ -16,6 +16,7 @@ args = parser.parse_args()
 
 
 def main():
+    print('开始执行')
     """
 
     """
@@ -31,6 +32,7 @@ def main():
         whether_pack = True
 
     ioliudownload(path, whether_pack)
+    print('执行完毕')
 
 
 if __name__ == '__main__':

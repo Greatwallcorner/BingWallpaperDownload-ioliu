@@ -20,6 +20,7 @@ THREADPOOL = ProcessPoolExecutor(NUMBERTHREAD)
 
 def ioliudownload(path: str, whether_pack: bool):
     if check_path_available(path):
+        print('路径可用：', path)
         amt = get_amt_of_page(HOST)
 
         for i in range(1, int(amt)):
