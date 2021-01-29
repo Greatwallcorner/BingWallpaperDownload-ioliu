@@ -11,6 +11,7 @@ from concurrent.futures import ProcessPoolExecutor
 from urllib import request
 
 from bs4 import BeautifulSoup
+from tqdm import tqdm
 
 COOKIES = None
 HOST = 'https://bing.ioliu.cn/'
@@ -24,14 +25,14 @@ def ioliudownload(path: str, whether_pack: bool):
         amt = get_amt_of_page(HOST)
         print('总页数:' + amt)
 
-        for i in range(1, int(amt)):
+        for i in tqdm(range(1, int(amt))):
             myhost = HOST
             pageurl = myhost + '?p=' + str(i)
             # print(pageurl)
             home_page = 'home_' + str(i)
             __get_the_page(path, pageurl, home_page)
-            print('下载第' + i + '页', end='', flush=True)
-            process_bar(i / int(amt), end_str='100%', total_length=100)
+            print('下载第' + str(i) + '页', end='', flush=True)
+            # process_bar(i / int(amt), end_str='100%', total_length=100)
     if whether_pack:
         zipfile.ZipFile.write(str('BingBackgroud', time.strftime('%Y-%m-%d_%H:%M', time.localtime())))
 
