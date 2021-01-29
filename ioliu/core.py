@@ -35,7 +35,7 @@ def ioliudownload(path: str, whether_pack: bool):
 
 def process_bar(percent, start_str='', end_str='', total_length=0):
     bar = ''.join('#' * int(percent * total_length)) + ''
-    bar = '' + start_str + bar.ljust(total_length) + '{4.1%f}%|'.format(percent * 100) + end_str
+    bar = '' + start_str + bar.ljust(total_length) + '{.1%f}%|'.format(percent * 100) + end_str
     print(bar, end='', flush=True)
 
 
