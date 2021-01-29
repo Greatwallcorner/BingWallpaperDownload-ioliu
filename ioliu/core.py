@@ -14,7 +14,7 @@ from bs4 import BeautifulSoup
 
 COOKIES = None
 HOST = 'https://bing.ioliu.cn/'
-NUMBERTHREAD = 5
+NUMBERTHREAD = 10
 THREADPOOL = ProcessPoolExecutor(NUMBERTHREAD)
 
 
@@ -28,8 +28,15 @@ def ioliudownload(path: str, whether_pack: bool):
             # print(pageurl)
             home_page = 'home_' + str(i)
             __get_the_page(path, pageurl, home_page)
+            process_bar(i / int(amt), end_str='100%', total_length=15)
     if whether_pack:
         zipfile.ZipFile.write(str('BingBackgroud', time.strftime('%Y-%m-%d_%H-%M', time.localtime())))
+
+
+def process_bar(percent, start_str='', end_str='', total_length=0):
+    bar = ''.join('#' * int(percent * total_length)) + ''
+    bar = '' + start_str + bar.ljust(total_length) + '{4.1%f}%|'.format(percent * 100) + end_str
+    print(bar, end='', flush=True)
 
 
 def check_path_available(path: str):
@@ -136,7 +143,7 @@ def __download(uri_list: list = None, path: str = None):
             name = uri.split('/')[2].split('?')[0]  # 通过分割字符串得到文件名
             filename = str(path + name + '.jpg')
             url = HOST + uri
-            print(url)
+            # print(url, end='')
             try:
                 response = __simpleget(url).read()
             except http.client.IncompleteRead as e:
