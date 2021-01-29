@@ -28,14 +28,14 @@ def ioliudownload(path: str, whether_pack: bool):
             # print(pageurl)
             home_page = 'home_' + str(i)
             __get_the_page(path, pageurl, home_page)
-            process_bar(i / int(amt), end_str='100%', total_length=15)
+            process_bar(i / int(amt), end_str='100%', total_length=100)
     if whether_pack:
-        zipfile.ZipFile.write(str('BingBackgroud', time.strftime('%Y-%m-%d_%H-%M', time.localtime())))
+        zipfile.ZipFile.write(str('BingBackgroud', time.strftime('%Y-%m-%d_%H:%M', time.localtime())))
 
 
 def process_bar(percent, start_str='', end_str='', total_length=0):
     bar = ''.join('#' * int(percent * total_length)) + ''
-    bar = '' + start_str + bar.ljust(total_length) + '{.1%f}%|'.format(percent * 100) + end_str
+    bar = '\r' + start_str + bar.ljust(total_length) + '{:0<4.1f}%|'.format(percent * 100) + end_str
     print(bar, end='', flush=True)
 
 
