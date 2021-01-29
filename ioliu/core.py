@@ -22,6 +22,7 @@ def ioliudownload(path: str, whether_pack: bool):
     if check_path_available(path):
         print('路径可用：', path)
         amt = get_amt_of_page(HOST)
+        print('总页数:' + amt)
 
         for i in range(1, int(amt)):
             myhost = HOST
@@ -29,6 +30,7 @@ def ioliudownload(path: str, whether_pack: bool):
             # print(pageurl)
             home_page = 'home_' + str(i)
             __get_the_page(path, pageurl, home_page)
+            print('下载第' + i + '页', end='', flush=True)
             process_bar(i / int(amt), end_str='100%', total_length=100)
     if whether_pack:
         zipfile.ZipFile.write(str('BingBackgroud', time.strftime('%Y-%m-%d_%H:%M', time.localtime())))
