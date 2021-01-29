@@ -2,13 +2,12 @@
 """
 heatdesert
 """
-import argparse
 import http.client
 import math
 import os
 import time
 import zipfile
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ProcessPoolExecutor
 from urllib import request
 
 from bs4 import BeautifulSoup
@@ -16,7 +15,7 @@ from bs4 import BeautifulSoup
 COOKIES = None
 HOST = 'https://bing.ioliu.cn/'
 NUMBERTHREAD = 5
-THREADPOOL = ThreadPoolExecutor(NUMBERTHREAD)
+THREADPOOL = ProcessPoolExecutor(NUMBERTHREAD)
 
 
 def ioliudownload(path: str, whether_pack: bool):
@@ -156,29 +155,11 @@ def save_pic(name: list, res: list):
     :param res:
     """
     for na, re in zip(name, res):
-        print(type(re))
         file = open(str(na).encode('utf-8'), 'wb', 2048)
 
         file.write(re)
         # picoperation.modify_meta(filename, intro)
 
 
-def main():
-    """
-使用argparser解析命令
-    """
-    path = None
-    whether_pack = False
-    parser = argparse.ArgumentParser('download bing backgroud')
-    parser.add_argument('o', '--output', type=str, help='file output path')
-    parser.add_argument('-p', '--pack', action='store_true', help='pack file')
-    args = parser.parse_args()
 
-    if args.output is not None:
-        path = args.output
-
-    if args.pack is True:
-        whether_pack = True
-
-    ioliudownload(path, whether_pack)
 
